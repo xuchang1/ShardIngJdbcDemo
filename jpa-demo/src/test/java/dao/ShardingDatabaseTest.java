@@ -23,9 +23,9 @@ public class ShardingDatabaseTest {
 
 	@Test
 	public void addTest() {
-		for (int i = 1; i < 20; i++) {
+		for (long i = 1; i < 20; i++) {
 			Position position = new Position();
-			position.setId(i);
+//			position.setId(i);
 			position.setName("xiaoming" + i);
 			position.setSalary("1000000");
 			position.setCity("合肥");

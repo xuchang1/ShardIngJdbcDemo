@@ -1,9 +1,6 @@
 package com.study.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author changxu13
@@ -15,7 +12,9 @@ public class Position {
 
 	@Id
 	@Column(name = "id")
-	private Integer id;
+	//自动生成主键的策略
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@Column(name = "name")
 	private String name;
@@ -26,11 +25,11 @@ public class Position {
 	@Column(name = "city")
 	private String city;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
