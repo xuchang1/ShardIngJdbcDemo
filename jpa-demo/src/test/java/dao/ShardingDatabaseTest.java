@@ -78,4 +78,36 @@ public class ShardingDatabaseTest {
 			bOrderRepository.save(bOrder);
 		}
 	}
+
+	@Test
+	public void QueryTest2() {
+		Object object = bOrderRepository.findOrderById(525108026915422209L);
+		Object[] result = (Object[])object;
+		System.out.println("查询结果为 : " + result[0] + ", " + result[1] + ", " + result[2] + ", " + result[3]);
+	}
+
+	@Test
+	public void QueryTest3() {
+		Object[] object = bOrderRepository.findOrderByCompanyId(9);
+		for (int i = 0; i <object.length; i++) {
+			Object[] result = (Object[]) object[i];
+			System.out.println("查询结果为 : " + result[0] + ", " + result[1] + ", " + result[2] + ", " + result[3]);
+		}
+	}
+
+	@Test
+	public void QueryTest4() {
+		Object object = bOrderRepository.findOrderByCompanyIdAndId(9, 525108026915422209L);
+		Object[] result = (Object[])object;
+		System.out.println("查询结果为 : " + result[0] + ", " + result[1] + ", " + result[2] + ", " + result[3]);
+	}
+
+	@Test
+	public void QueryTest5() {
+		Object[] object = bOrderRepository.findOrderByName("小明");
+		for (int i = 0; i <object.length; i++) {
+			Object[] result = (Object[]) object[i];
+			System.out.println("查询结果为 : " + result[0] + ", " + result[1] + ", " + result[2] + ", " + result[3]);
+		}
+	}
 }
