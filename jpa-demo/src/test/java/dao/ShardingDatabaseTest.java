@@ -2,6 +2,8 @@ package dao;
 
 import com.study.Main;
 import com.study.entity.Position;
+import com.study.entity.PositionDetail;
+import com.study.repository.PositionDetailRepository;
 import com.study.repository.PositionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +23,9 @@ public class ShardingDatabaseTest {
 	@Resource
 	private PositionRepository positionRepository;
 
+	@Resource
+	private PositionDetailRepository positionDetailRepository;
+
 	@Test
 	public void addTest() {
 		for (long i = 1; i < 20; i++) {
@@ -30,6 +35,22 @@ public class ShardingDatabaseTest {
 			position.setSalary("1000000");
 			position.setCity("合肥");
 			positionRepository.save(position);
+		}
+	}
+
+	@Test
+	public void addTest2() {
+		for (long i = 1; i < 20; i++) {
+			Position position = new Position();
+			position.setName("xiaoming" + i);
+			position.setSalary("1000000");
+			position.setCity("合肥");
+			positionRepository.save(position);
+
+			PositionDetail positionDetail = new PositionDetail();
+			positionDetail.setPid(position.getId());
+			positionDetail.setDescription("职位描述。。。。。。。。。。。。。。。");
+			positionDetailRepository.save(positionDetail);
 		}
 	}
 }
