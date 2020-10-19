@@ -1,8 +1,10 @@
 package dao;
 
 import com.study.Main;
+import com.study.entity.BOrder;
 import com.study.entity.Position;
 import com.study.entity.PositionDetail;
+import com.study.repository.BOrderRepository;
 import com.study.repository.PositionDetailRepository;
 import com.study.repository.PositionRepository;
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Random;
 
 /**
  * @author changxu13
@@ -25,6 +28,9 @@ public class ShardingDatabaseTest {
 
 	@Resource
 	private PositionDetailRepository positionDetailRepository;
+
+	@Resource
+	private BOrderRepository bOrderRepository;
 
 	@Test
 	public void addTest() {
@@ -51,6 +57,25 @@ public class ShardingDatabaseTest {
 			positionDetail.setPid(position.getId());
 			positionDetail.setDescription("职位描述。。。。。。。。。。。。。。。");
 			positionDetailRepository.save(positionDetail);
+		}
+	}
+
+	@Test
+	public void QueryTest() {
+		Object object = positionRepository.findPositionById(525086958838349824L);
+		Object[] result = (Object[])object;
+		System.out.println("查询结果为 : " + result[0] + ", " + result[1] + ", " + result[2] + ", " + result[3] + ", " + result[4]);
+	}
+
+	@Test
+	public void addTest3() {
+		Random random = new Random();
+		for (int i = 1; i < 20; i++) {
+			BOrder bOrder = new BOrder();
+			bOrder.setCompanyId(random.nextInt(10));
+			bOrder.setPositionId(i);
+			bOrder.setName("小明");
+			bOrderRepository.save(bOrder);
 		}
 	}
 }
